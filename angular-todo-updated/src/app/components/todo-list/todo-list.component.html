@@ -1,0 +1,74 @@
+<img class="logo" width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+
+<input type="text" class="todo-input" placeholder="What needs to be done" [(ngModel)]="todoTitle" (keyup.enter)="addTodo()">
+<!--[(ngModel)]="todoTitle" syntex for 'Event and property'-->
+<!--(keyup.enter)="addTodo()" syntex for 'Element event / Component event / Directive event'-->
+
+<div class="todo-item" *ngFor="let todo of todosFiltered()" @fade>
+  <!-- @fade: animations 불러오기 -->
+  <div class="todo-item-left">
+    <input type="checkbox"  [(ngModel)]="todo.completed">
+    <!-- [(ngModel)]="todo.completed" : when it's done //-->
+    <div *ngIf="!todo.editing; else editingTodo" class="todo-item-labe" [ngClass] ="{ 'completed' : todo.completed }" (dblclick)="editTodo(todo)">{{ todo.title }}
+    <!--*ngIf="!todo.editing; else editingTodo" 더블클릭했을 때 input을 보여주고 아닐경우 div를 보여줌 : 하단 ng-template과 같은 template 짝이 있어야함-->
+    <!--[ngClass] ="{ 'completed' : todo.completed }" : checkbox의 ture or false에 따라 done or not에 따라 title에 completed class가 주어지게 함 -->
+   </div><!--(dblclick)= double click handler-->
+    <ng-template #editingTodo>
+      <input type="text" class="todo-item-edit" [(ngModel)]="todo.title" (blur)="doneEdit(todo)" (keyup.enter)="doneEdit(todo)" (keyup.esc)="cancelEdit(todo)" autofocus> 
+      <!--더블클릭했을 때 todo list를 수정할 수 있도록 보여줄 input박스 -->
+      <!-- autofocus : 더블클릭 후 input박스에 자동 커서 넣어짐, 한번만 작동하기 때문에 augular-autofocus-fix 를  install -->
+      <!-- (blur) : edit이 끝나면 블러처리 -->
+      <!-- (keyup.enter) when press the enter key  -->
+    </ng-template>
+  </div>
+  <div class="remove-item" (click)="deleteTodo(todo.id)">
+    &times;
+  </div>
+</div>
+
+<div class="extra-container">
+  <div><label><input type="checkbox" (click)="checkAllTodos()"> Check All</label></div>
+  <div>{{ remaining() }} items left</div>
+  <!-- todo-list.component.ts > remaining에서 텍스트 렌더링됨 -->
+</div>
+
+<div class="extra-container">
+    <div>
+        <button [ngClass]="{'active' : filter === 'all'}" (click)="filter='all'">All</button>
+        <button [ngClass]="{'active' : filter === 'active'}" (click)="filter='active'">Active</button>
+        <button [ngClass]="{'active' : filter === 'completed'}" (click)="filter='completed'">Completed</button>
+    </div>
+    <div *ngIf ="atleastOneCompleted()">
+        <button (click)="clearCompleted()">clear Completed</button>
+    </div>
+</div>
+  
+
+<!--
+  [Binding syntax]
+
+  **From the source-to-view
+    {{expression}}
+    [target]="expression"
+    bind-target="expression"
+  
+  **From view-to-source
+    (target)="statement"
+    on-target="statement"
+
+  **Two-way sequence: view-to-source-to-view
+    [(target)]="expression"
+    bindon-target="expression"
+-->
+
+<!-- 
+  [Built-in structural directives]
+  **NgIf
+  conditionally creates or destroys subviews from the template.
+  
+  **NgFor
+  repeat a node for each item in a list.
+  
+  **NgSwitch
+  a set of directives that switch among alternative views.
+ -->
