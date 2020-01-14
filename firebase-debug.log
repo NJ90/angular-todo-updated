@@ -1,0 +1,37 @@
+[debug] [2020-01-14T09:13:49.049Z] ----------------------------------------------------------------------
+[debug] [2020-01-14T09:13:49.051Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\specupad\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-01-14T09:13:49.051Z] CLI Version:   7.11.0
+[debug] [2020-01-14T09:13:49.051Z] Platform:      win32
+[debug] [2020-01-14T09:13:49.051Z] Node Version:  v10.16.3
+[debug] [2020-01-14T09:13:49.052Z] Time:          Tue Jan 14 2020 18:13:49 GMT+0900 (GMT+09:00)
+[debug] [2020-01-14T09:13:49.052Z] ----------------------------------------------------------------------
+[debug] [2020-01-14T09:13:49.052Z] 
+[debug] [2020-01-14T09:13:49.060Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-01-14T09:13:49.061Z] > authorizing via signed-in user
+[debug] [2020-01-14T09:13:49.061Z] [iam] checking project todo-angular-nj for permissions ["firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update"]
+[debug] [2020-01-14T09:13:49.062Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/todo-angular-nj:testIamPermissions  
+
+[debug] [2020-01-14T09:13:50.287Z] <<< HTTP RESPONSE 200
+[debug] [2020-01-14T09:13:50.289Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/todo-angular-nj  
+ 
+[debug] [2020-01-14T09:13:50.862Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'todo-angular-nj'...
+[info] 
+[info] i  deploying database, hosting
+[info] i  database: checking rules syntax...
+[debug] [2020-01-14T09:13:50.872Z] >>> HTTP REQUEST PUT https://todo-angular-nj.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": true,
+    ".write": true
+  }
+}
+[debug] [2020-01-14T09:13:51.897Z] <<< HTTP RESPONSE 404
+[debug] [2020-01-14T09:13:51.898Z] <<< HTTP RESPONSE BODY {
+  "error" : "Firebase error. Please ensure that you spelled the name of your Firebase correctly"
+}
+
+[error] 
+[error] Error: Unexpected error while deploying database rules.
