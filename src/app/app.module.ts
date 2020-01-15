@@ -12,6 +12,11 @@ import { from } from 'rxjs';
 // import { AutofocusModule } from 'angular-autofocus-fix';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 
+//firebase 모듈 추가
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment'
+import { AngularFireAuthModule } from '@angular/fire/auth'
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +27,8 @@ import { TodoItemComponent } from './components/todo-item/todo-item.component';
     BrowserModule,    
     BrowserAnimationsModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
     // AutofocusModule
   ],
   providers: [],
